@@ -44,7 +44,8 @@ def get_data_from_request(request: Request, config: Config, event_type: str):
     if config.capture_headers:
         result["headers"] = dict(request.headers)
 
-    # TODO: capture body
+    if config.capture_body:
+        result["body"] = request.text()
 
     result["url"] = get_url_dict(str(request.url))
     return result
